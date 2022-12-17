@@ -1,6 +1,6 @@
 ## **Part 1.Ready-made docker**
 
-- Take the official docker image from nginx and download it using `docker pull`.
+- Take the official docker image from nginx and download it using `docker pull`
 
 	![image info](/part1/docker_pull.png)
 
