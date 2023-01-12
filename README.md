@@ -1,4 +1,4 @@
-## **Part 1.Ready-made docker**
+## **Part 1. Ready-made docker**
 
 - Take the official docker image from nginx and download it using `docker pull`
 
@@ -46,6 +46,61 @@ The **nginx** start page is available in the browser at _localhost:80_
 
 ![image info](/part1/nginx.png)
 
-Restart docker container with `docker restart run-nginx`
+- Restart docker container with `docker restart run-nginx`
 
 ![image info](/part1/docker_restart_nginx.png)
+
+## **Part 2. Operations with container**
+
+ - Read the *nginx.conf* configuration file inside the docker container with the *exec* command
+
+![image info](/part2/docker_exec.png)
+
+- Create a *nginx.conf* file on a local machine
+
+![image info](/part2/touch_nginx.png)
+
+- Configure it on the */status* path to return the **nginx** server status page
+
+![image info](/part2/my_nginx_file.png)
+
+- Copy the created *nginx.conf* file inside the docker image using the docker `cp command`
+
+![image info](/part2/docker_cp.png)
+
+- Restart **nginx** inside the docker image with exec
+
+![image info](/part2/docker_exec_2.png)
+
+- Check that *localhost:80/status* returns the **nginx** server status page
+
+![image info](/part2/localhost_status.png)
+
+- Export the container to a *container.tar* file with the *export* command
+
+![image info](/part2/export.png)
+
+- Stop the container
+
+![image info](/part2/docker_stop_run_nginx.png)
+
+- Delete the image with `docker rmi [image_id|repository]` without removing the container first
+
+![image info](/part2/docker_rmi_3.png)
+
+- Delete stopped container
+
+![image info](/part2/docker_rm_run-nginx.png)
+
+- Import the container back using the *import* command
+
+![image info](/part2/docker_import_cmd.png)
+
+- Run the imported container
+
+![image info](/part2/docker_run_80.png)
+
+- Check that *localhost:80/status* returns the **nginx** server status page
+
+![image info](/part2/localhost80:80.png)
+
