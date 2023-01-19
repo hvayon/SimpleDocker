@@ -23,11 +23,11 @@
 	![image info](/img/part1/docker_inspect_3.png)
 	![image info](/img/part1/docker_inspect_4.png)
 
-The container size:\
+1. The container size:\
 ![image info](/img/part1/size.png)\
-List of mapped ports:\
+2. List of mapped ports:\
 ![image info](/img/part1/ports.png)\
-Container ip:\
+3. Container ip:\
 ![image info](/img/part1/IPAddress.png)
 
 - Stop docker image with `docker stop keen_kare`
@@ -42,7 +42,7 @@ Container ip:\
 
 ![image info](/img/part1/docker_run_name_run-nginx.png)
 
-The **nginx** start page is available in the browser at _localhost:80_
+- The **nginx** start page is available in the browser at _localhost:80_
 
 ![image info](/img/part1/nginx.png)
 
@@ -114,21 +114,21 @@ The **nginx** start page is available in the browser at _localhost:80_
 
 ![image info](/img/part3/docker_pull_nginx.png)
 
-Place the mini web server file in the directory
+1. Place the mini web server file in the directory
 
 ![image info](/img/part3/docker_cp_main.png)
 
-`main.c` file content
+2. `main.c` file content
 
 ![image info](/img/part3/cat_main.png)
 
 - Run the written mini server via spawn-fcgi on port 8080
 
-Updating the container. Installation gcc, spawn-dcgi, libfcgi-dev
+1. Updating the container. Installation gcc, spawn-dcgi, libfcgi-dev
 
 ![image info](/img/part3/update_container.png)
 
-Compiling and running our server
+2. Compiling and running our server
 
 ![image info](/img/part3/run_serv.png)
 
@@ -138,7 +138,7 @@ Compiling and running our server
 
 - Check that browser on localhost:81 returns the page you wrote
 
-Reloading the container and checking the page in the browser  
+1. Reloading the container and checking the page in the browser  
 
 ![image info](/img/part3/localhost:81.png)
 ![image info](/img/part3/localhost_browser.png)
@@ -211,10 +211,10 @@ Reloading the container and checking the page in the browser
 
 - Write a docker-compose.yml file, using which:
 
-1) Start the docker container from Part 5 (it must work on local network, i.e., you don't need to use EXPOSE instruction and map ports to local machine)
+1. Start the docker container from Part 5 (it must work on local network, i.e., you don't need to use EXPOSE instruction and map ports to local machine)
 
 
-2) Start the docker container with nginx which will proxy all requests from port 8080 to port 81 of the first container
+2. Start the docker container with nginx which will proxy all requests from port 8080 to port 81 of the first container
 
 ![image info](/part6/img/docker-compose.png)
 
