@@ -1,242 +1,226 @@
-## **Part 1. Ready-made docker**
+# Simple Docker
 
-- Take the official docker image from nginx and download it using `docker pull`
+Introduction to docker. Developing a simple docker image for your own server.
 
-	![image info](/img/part1/docker_pull.png)
+The russian version of the task can be found in the repository.
 
-- Check for the docker image with `docker images`
+## Contents
 
-	![image info](/img/part1/docker_image.png)
+1. [Chapter I](#chapter-i)
+2. [Chapter II](#chapter-ii) \
+    2.1. [nginx](#nginx) \
+    2.2. [Docker](#docker) \
+    2.3. [Dockle](#dockle)
+3. [Chapter III](#chapter-iii) \
+    3.1. [Ready-made docker](#part-1-ready-made-docker) \
+    3.2. [Operations with container](#part-2-operations-with-container) \
+    3.3. [Mini web server](#part-3-mini-web-server) \
+    3.4. [Your own docker](#part-4-your-own-docker) \
+    3.5. [Dockle](#part-5-dockle) \
+    3.6. [Basic Docker Compose](#part-6-basic-docker-compose)
 
-- Run docker image with `docker run -d 3964ce7b8458`
 
-	![image info](/img/part1/docker_run.png)
+## Chapter I
 
-- Check that the image is running with `docker ps`
+![simple_docker](misc/images/simple_docker.png)
 
-	![image info](/img/part1/docker_ps.png)
+Planet Earth, Atlantic Ocean, Her Majesty's Ship "Hood", heading to London, UK, nowadays.
 
-- View container information with `docker inspect keen_kare`
+You never liked moving. A lot of fuss, little action. But you managed to find a great job to delve into DevOps world in Foggy Albion.
+And you're not one to let minor difficulties ruin your plans.
 
-	![image info](/img/part1/docker_inspect_1.png)
-	![image info](/img/part1/docker_inspect_2.png)
-	![image info](/img/part1/docker_inspect_3.png)
-	![image info](/img/part1/docker_inspect_4.png)
+From your cabin window you hear the sound of the waves, the ship is peacefully rocking on them and you remember your favorite novel about the sea - "Moby Dick".
+Although the flow of the plot is far from straightforward, with many lyrical digressions and philosophical musings, you, like everyone else, associate this book primarily with Moby Dick himself - the white whale.
 
-1. The container size:\
-![image info](/img/part1/size.png)\
-2. List of mapped ports:\
-![image info](/img/part1/ports.png)\
-3. Container ip:\
-![image info](/img/part1/IPAddress.png)
+"Hmm... White whale..." - here you remember that during the long journey you were going to work on docker.
 
-- Stop docker image with `docker stop keen_kare`
 
-![image info](/img/part1/docker_stop.png)
+## Chapter II
 
-- Check that the image has stopped with `docker ps`
+### **nginx**
 
-![image info](/img/part1/docker_ps_keen_kare.png)
+**nginx** (pronounced "engine-x") is an open-source reverse proxy server for HTTP, HTTPS, etc. **nginx** is also used as a load balancer, web server and for HTTP caching. The **nginx** project focuses on high parallelism, high performance and low memory usage.
 
-- Run docker with mapped ports 80 and 443 on the local machine with run command
 
-![image info](/img/part1/docker_run_name_run-nginx.png)
+**nginx** has one main process and several worker processes.
+The primary task of the main process is to read and check the configuration and manage the worker processes.
+The worker processes perform the actual processing of the requests.
 
-- The **nginx** start page is available in the browser at _localhost:80_
+How **nginx** and its modules work is defined in the configuration file. By default, the configuration file is called *nginx.conf*
 
-![image info](/img/part1/nginx.png)
+### **Docker**
 
-- Restart docker container with `docker restart run-nginx`
+A container is a new "executable file" that includes all the dependencies the product needs.
 
-![image info](/img/part1/docker_restart_nginx.png)
+The main advantage of containerisation is the isolation of dependencies and a single, simple software start-up point.
 
-## **Part 2. Operations with container**
+Basic terms:
+- Docker image - the "package" for the application and dependencies (including system ones).
+- Container - an instance of an image, i.e. a 'alive' image.
 
- - Read the *nginx.conf* configuration file inside the docker container with the *exec* command
+**Docker** is a platform that is designed to develop, deploy and run applications in containers.
+**Docker** is the 'de-facto' standard containerisation tool in the industry, but it is not the first or last among containerisation technologies.
 
-![image info](/img/part2/docker_exec.png)
+The forerunners of **Docker** containers were virtual machines.
+A virtual machine, like a container, isolates the application and its dependencies from the outside environment.
+However, **Docker** containers have advantages over virtual machines.
+For example, they are very easy to port, consume fewer resources, start and run faster.
 
-- Create a *nginx.conf* file on a local machine
+A docker image consists of layers. Each layer describes some change to be performed to the data on the running container.
+The structure of links between layers is hierarchical. There is a base layer on which the other layers are "overlaid".
+The *Dockerfile* is used to create an image. Each instruction in it creates a new layer.
 
-![image info](/img/part2/touch_nginx.png)
+### **Dockle**
 
-- Configure it on the */status* path to return the **nginx** server status page
+**Dockle** is a container image security checking tool that can be used to find vulnerabilities.
 
-![image info](/img/part2/my_nginx_file.png)
+Key features and benefits of **Dockle**:
+- searches for vulnerabilities in images
+- helps in creating a proper Dockerfile
+- easy to use, you only need to specify the image name
+- support for *CIS Benchmarks*.
 
-- Copy the created *nginx.conf* file inside the docker image using the docker `cp command`
+### **Docker Compose**
 
-![image info](/img/part2/docker_cp.png)
+Docker Compose is a tool for handling tasks related to projects deployment.
+Docker Compose can be helpful if several services are used to keep the project running.
 
-- Restart **nginx** inside the docker image with exec
+Docker Compose is used to simultaneously manage multiple containers that are part of an application.
+This tool offers the same features as Docker, but allows to work with more complex distributed applications, e.g. microservices.
 
-![image info](/img/part2/docker_exec_2.png)
 
-- Check that *localhost:80/status* returns the **nginx** server status page
+## Chapter III
 
-![image info](/img/part2/localhost_status.png)
+As a result of the work you should provide a report on the first two tasks. Each part of the task describe what should be added to the report once it has been completed. This can be answers to questions, screenshots, etc.
 
-- Export the container to a *container.tar* file with the *export* command
+As a result of the third task you should provide source files for running the web server.
 
-![image info](/img/part2/export.png)
+As a result of the fourth and fifth tasks you should provide dockerfiles.
 
-- Stop the container
+As a result of the sixth task you should provide a *docker-compose.yml* file and the dockerfiles needed to run it (if not provided earlier).
 
-![image info](/img/part2/docker_stop_run_nginx.png)
+- A report with a .md extension must be uploaded to the repository, in the src folder.
+- All parts of the task should be highlighted in the report as level 2 headings.
+- Within one part of the task, everything that is added to the report must be in the form of the list.
+- Each screenshot in the report must be briefly captioned (what’s in the screenshot).
+- All screenshots must be cropped so that only the relevant part of the screen is shown.
+- It’s allowed to have several task points shown in one screenshot, but they must all be described in the caption.
+- Source files for running the web server from the third task should be uploaded to the repository, in the src/server folder.
+- Dockerfiles from the fourth and fifth tasks should be uploaded to the repository, in the src folder.
+- *docker-compose.yml* from the sixth task should be uploaded to the repository, in the src folder.
+- Be prepared to demonstrate your work if necessary.
 
-- Delete the image with `docker rmi [image_id|repository]` without removing the container first
+## Part 1. Ready-made docker
+
+As the final goal of your little practice you have immediately chosen to write a docker image for your own web server, so first you need to deal with a ready-made docker image for the server.
+You chose a pretty simple **nginx**.
 
-![image info](/img/part2/docker_rmi_3.png)
+**== Task ==**
 
-- Delete stopped container
+##### Take the official docker image from **nginx** and download it using `docker pull`.
+##### Check for the docker image with `docker images`
+##### Run docker image with `docker run -d [image_id|repository]`
+##### Check that the image is running with `docker ps`
+##### View container information with `docker inspect [container_id|container_name]`
+##### From the command output define and write in the report the container size, list of mapped ports and container ip
+##### Stop docker image with `docker stop [container_id|container_name]`
+##### Check that the image has stopped with `docker ps`
+##### Run docker with mapped ports 80 and 443 on the local machine with *run* command
+##### Check that the **nginx** start page is available in the browser at *localhost:80*
+##### Restart docker container with `docker restart [container_id|container_name]`
+##### Check in any way that the container is running
 
-![image info](/img/part2/docker_rm_run-nginx.png)
+- Add the following screenshots to the report:
+    - the call and output of all commands used in this part of the task;
+    - **nginx** start page at *localhost:80* (address must be shown).
+    
+*Note:* **Don't upload heavy files (>10 mb) to git.**
 
-- Import the container back using the *import* command
+## Part 2. Operations with container
 
-![image info](/img/part2/docker_import_cmd.png)
+Docker image and container are ready. Now we can look into **nginx** configuration and display page status.
 
-- Run the imported container
+**== Task ==**
 
-![image info](/img/part2/docker_run_80.png)
+##### Read the *nginx.conf* configuration file inside the docker container with the *exec* command
+##### Create a *nginx.conf* file on a local machine
+##### Configure it on the */status* path to return the **nginx** server status page
+##### Copy the created *nginx.conf* file inside the docker image using the `docker cp` command
+##### Restart **nginx** inside the docker image with *exec*
+##### Check that *localhost:80/status* returns the **nginx** server status page
+##### Export the container to a *container.tar* file with the *export* command
+##### Stop the container
+##### Delete the image with `docker rmi [image_id|repository]`without removing the container first
+##### Delete stopped container
+##### Import the container back using the *import*command
+##### Run the imported container
+##### Check that *localhost:80/status* returns the **nginx** server status page
 
-- Check that *localhost:80/status* returns the **nginx** server status page
+- Add the following screenshots to the report:
+    - the call and output of all commands used in this part of the task;
+    - the contents of the created *nginx.conf* file;
+    - the **nginx** server status page at *localhost:80/status*.
 
-![image info](/img/part2/localhost80:80.png)
 
-## **Part 3. Mini web server**
+## Part 3. Mini web server
 
-- Write a mini server in **C** and **FastCgi** that will return a simple page saying **Hello World!**
+It's time to take a little break from the docker to prepare for the last stage. It's time to write your own server.
 
-`docker pull nginx` - download nginx image  
-`docker images` - check image id  
-`docker run -d -p 81:81 *IMAGE_ID*` - run docker with mapped ports  
+**== Task ==**
 
-![image info](/img/part3/docker_pull_nginx.png)
+##### Write a mini server in **C** and **FastCgi** that will return a simple page saying `Hello World!`
+##### Run the written mini server via *spawn-fcgi* on port 8080
+##### Write your own *nginx.conf* that will proxy all requests from port 81 to *127.0.0.1:8080*
+##### Check that browser on *localhost:81* returns the page you wrote
+##### Put the *nginx.conf* file under *./nginx/nginx.conf* (you will need this later)
 
-1. Place the mini web server file in the directory
+## Part 4. Your own docker
 
-![image info](/img/part3/docker_cp_main.png)
+Now everything is ready. You can start writing the docker image for the created server.
 
-2. `main.c` file content
+**== Task ==**
 
-![image info](/img/part3/cat_main.png)
+*When writing a docker image avoid multiple calls of RUN instructions*
 
-- Run the written mini server via spawn-fcgi on port 8080
+#### Write your own docker image that:
+##### 1) builds mini server sources on FastCgi from [Part 3](#part-3-mini- web-server)
+##### 2) runs it on port 8080
+##### 3) copies inside the image written *./nginx/nginx.conf*
+##### 4) runs **nginx**.
+_**nginx** can be installed inside the docker itself, or you can use a ready-made image with **nginx** as base._
+##### Build the written docker image with `docker build`, specifying the name and tag
+##### Check with `docker images` that everything is built correctly
+##### Run the built docker image by mapping port 81 to 80 on the local machine and mapping the *./nginx* folder inside the container to the address where the **nginx** configuration files are located (see [Part 2](#part-2-operations-with-container))
+##### Check that the page of the written mini server is available on localhost:80
+##### Add proxying of */status* page in *./nginx/nginx.conf* to return the **nginx** Яserver status
+##### Restart docker image
+*If everything is done correctly, after saving the file and restarting the container, the configuration file inside the docker image should update itself without any extra steps
+##### Check that *localhost:80/status* now returns a page with **nginx** status
 
-1. Updating the container. Installation gcc, spawn-dcgi, libfcgi-dev
+## Part 5. **Dockle**
 
-![image info](/img/part3/update_container.png)
+Once you've written the image, it's never a bad idea to check it for security.
 
-2. Compiling and running our server
+**== Task ==**
 
-![image info](/img/part3/run_serv.png)
+##### Check the image from the previous task with `dockle [image_id|repository]`
+##### Fix the image so that there are no errors or warnings when checking with **dockle**
 
-- Write your own nginx.conf that will proxy all requests from port 81 to 127.0.0.1:8080
 
-![image info](/img/part3/own_nginx.png)
+## Part 6. Basic **Docker Compose**
 
-- Check that browser on localhost:81 returns the page you wrote
+There, you've finished your warm-up. Wait a minute though...
+Why not try experimenting with deploying a project consisting of several docker images at once?
 
-1. Reloading the container and checking the page in the browser  
+**== Task ==**
 
-![image info](/img/part3/localhost:81.png)
-![image info](/img/part3/localhost_browser.png)
+##### Write a *docker-compose.yml* file, using which:
+##### 1) Start the docker container from [Part 5](#part-5-dockle) _(it must work on local network, i.e., you don't need to use **EXPOSE** instruction and map ports to local machine)_
+##### 2) Start the docker container with **nginx** which will proxy all requests from port 8080 to port 81 of the first container
+##### Map port 8080 of the second container to port 80 of the local machine
+##### Stop all running containers
+##### Build and run the project with the `docker-compose build` and `docker-compose up` commands
+##### Check that the browser returns the page you wrote on *localhost:80* as before
 
-- Put the nginx.conf file under ./nginx/nginx.conf (you will need this later)
 
-![image info](/img/part3/nginx_file.png)
-
-## **Part 4. Your own docker**
-
-- Creating a docker image
-
-![image info](/part4/img/docker_image.png)
-
-- Running a script from docker
-
-![image info](/part4/img/docker_script.png)
-
-- Build the written docker image with `docker build`, specifying the name and tag
-
-![image info](/part4/img/docker_build.png)
-
-- Check with `docker images` that everything is built correctly
-
-![image info](/part4/img/docker_images.png)
-
-- Run the built docker image by mapping port 81 to 80 on the local machine and mapping the *./nginx* folder inside the container to the address where the nginx configuration files are located
-
-![image info](/part4/img/docker_run.png)
-
-- Check that the page of the written mini server is available on localhost:80
-
-![image info](/part4/img/curl_localhost:80.png)
-
-- Add proxying of */status* page in *./nginx/nginx.conf* to return the **nginx** server status
-
-![image info](/part4/img/nginx_file.png)
-
-- Restart docker image
-
-![image info](/part4/img/docker_restart.png)
-
-- Check that *localhost:80/status* now returns a page with **nginx** status
-
-![image info](/part4/img/curl_localhost:80:status.png)
-
-## **Part 5. Dockle**
-
-- Check the image from the previous task with dockle `[image_id|repository]`
-
-![image info](/part5/img/install_dockle.png)
-
-![image info](/part5/img/check_dockle_1.png)
-
-![image info](/part5/img/check_dockle_2.png)
-
-- Fix the image so that there are no errors or warnings when checking with **dockle**
-
-![image info](/part5/img/dockerfile.png)
-
-![image info](/part5/img/docker_build_new.png)
-
-![image info](/part5/img/docker_run_new.png)
-
-![image info](/part5/img/check_dockle_new.png)
-
-![image info](/part5/img/docker_localhost.png)
-
-## **Part 6. Basic Docker Compose**
-
-- Write a docker-compose.yml file, using which:
-
-1. Start the docker container from Part 5 (it must work on local network, i.e., you don't need to use EXPOSE instruction and map ports to local machine)
-
-
-2. Start the docker container with nginx which will proxy all requests from port 8080 to port 81 of the first container
-
-![image info](/part6/img/docker-compose.png)
-
-- Map port 8080 of the second container to port 80 of the local machine
-
-- Stop all running containers
-
-![image info](/part6/img/docker_ps.png)
-
-- Build and run the project with the `docker-compose build` and `docker-compose up` commands
-
-![image info](/part6/img/docker-compose_build.png)
-
-![image info](/part6/img/docker_images.png)
-
-![image info](/part6/img/docker-compose_up.png)
-
-- Check that the browser returns the page you wrote on localhost:80 as before
-
-![image info](/part6/img/check_work.png)
-
-
-
-
-
+💡 [Tap here](https://forms.yandex.ru/u/6357f52902848f350b554d5f/) **to leave your feedback on the project**. Pedago Team really tries to make your educational experience better.
